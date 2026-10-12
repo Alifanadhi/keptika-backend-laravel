@@ -1,0 +1,5 @@
+Font di-load dari Google Fonts (Inter + Space Grotesk).
+
+Kalau nanti perlu self-host (mis. sekolah tanpa internet stabil),
+taruh file .woff2 di sini, lalu ganti tag <link> Google Fonts di
+setiap HTML dengan @font-face di css/tokens.css.

@@ -1,0 +1,147 @@
+/* Design tokens. Semua warna, tipografi, dan spasi
+   didefinisikan di sini. Jangan tulis hex mentah di file lain. */
+
+:root {
+  /* Brand */
+  --petrol:        #0E4C5A;
+  --petrol-hover:  #0B3D48;
+  --petrol-soft:   #E4EEF0;
+
+  --teal:          #0F766E;
+  --teal-soft:     #E1F0EE;
+
+  --mint:          #14B8A6;
+  --mint-soft:     #E0F7F4;
+
+  /* Semantik */
+  --success:       #0F766E;
+  --success-soft:  #E1F0EE;
+
+  --warning:       #C77A22;
+  --warning-soft:  #FBF0E1;
+
+  --danger:        #B4342C;
+  --danger-soft:   #FBEAE9;
+
+  --info:          #0E4C5A;
+  --info-soft:     #E4EEF0;
+
+  /* Varian terang untuk dipakai DI ATAS permukaan
+     gelap (toast). Warna semantik normal terlalu
+     redup di sana — kontrasnya gagal. */
+  --danger-on-dark:  #F8907F;
+  --info-on-dark:    #7FC5D6;
+  --success-on-dark: var(--mint);
+
+  /* Netral */
+  --slate-900:     #1C2A31;   /* judul */
+  --slate-700:     #3D505B;   /* body */
+  --slate-500:     #5B7180;   /* teks sekunder */
+  --slate-400:     #8496A1;   /* placeholder, hint */
+  --slate-200:     #D6DEE2;   /* border */
+  --slate-100:     #E8EDEF;   /* divider */
+  --slate-50:      #F1F5F6;   /* page background */
+  --white:         #FFFFFF;
+
+  /* Peran teks */
+  --text-title:    var(--slate-900);
+  --text-body:     var(--slate-700);
+  --text-muted:    var(--slate-500);
+  --text-hint:     var(--slate-400);
+  --text-on-dark:  #FFFFFF;
+
+  /* Permukaan */
+  --bg-page:       var(--slate-50);
+  --bg-panel:      var(--white);
+  --bg-subtle:     #F7FAFB;
+
+  /* Border */
+  --border:        var(--slate-200);
+  --border-strong: #BFCBD1;
+  --border-focus:  var(--mint);
+
+  /* Tipografi */
+  /* Space Grotesk hanya untuk display & ANGKA.
+     Inter untuk semua teks. Dua bobot saja per
+     keluarga — lebih dari itu bikin hierarki berisik. */
+  --font-display:  'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --font-body:     'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono:     'SF Mono', 'JetBrains Mono', ui-monospace, monospace;
+
+  --w-regular:     400;
+  --w-medium:      500;
+  --w-semibold:    600;   /* hanya untuk --font-display */
+
+  /* Skala tipe — rasio 1.2 */
+  --fs-caption:    12px;
+  --fs-small:      13px;
+  --fs-body:       14px;
+  --fs-lead:       15px;
+  --fs-h3:         17px;
+  --fs-h2:         20px;
+  --fs-h1:         24px;
+  --fs-display:    32px;   /* angka indikator besar */
+
+  --lh-tight:      1.25;
+  --lh-normal:     1.5;
+  --lh-relaxed:    1.65;
+
+  /* Spasi (base unit 4px) */
+  --sp-1:          4px;
+  --sp-2:          8px;
+  --sp-3:          12px;
+  --sp-4:          16px;
+  --sp-5:          20px;
+  --sp-6:          24px;
+  --sp-8:          32px;
+  --sp-10:         40px;
+  --sp-12:         48px;
+  --sp-16:         64px;
+
+  /* Radius */
+  --r-sm:          6px;
+  --r-md:          8px;    /* button, input */
+  --r-lg:          12px;   /* card */
+  --r-xl:          16px;   /* panel besar, modal */
+  --r-full:        999px;  /* pill, badge */
+
+  /* Elevasi */
+  /* Halus. Bayangan yang terlihat = bayangan yang salah. */
+  --shadow-sm:     0 1px 2px rgba(28, 42, 49, 0.05);
+  --shadow-md:     0 2px 8px rgba(28, 42, 49, 0.07);
+  --shadow-lg:     0 8px 28px rgba(28, 42, 49, 0.10);
+  --shadow-focus:  0 0 0 3px rgba(20, 184, 166, 0.22);
+
+  /* Kontrol */
+  --h-input:       40px;
+  --h-button:      40px;
+  --h-button-sm:   32px;
+  --h-header:      60px;
+  --w-sidebar:     240px;
+
+  /* Motion */
+  --dur-fast:      120ms;
+  --dur-base:      250ms;
+  --dur-slow:      400ms;
+  --ease:          cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out:      cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Layer */
+  --z-dropdown:    100;
+  --z-sticky:      200;
+  --z-overlay:     300;
+  --z-modal:       400;
+  --z-toast:       500;
+}
+
+/* Hormati preferensi pengguna yang menonaktifkan animasi. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

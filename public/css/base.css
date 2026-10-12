@@ -1,0 +1,142 @@
+/* Reset dan gaya elemen dasar. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: var(--w-regular);
+  line-height: var(--lh-normal);
+  color: var(--text-body);
+  background: var(--bg-page);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* Tipografi */
+
+h1, h2, h3, h4 {
+  color: var(--text-title);
+  font-weight: var(--w-medium);
+  line-height: var(--lh-tight);
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+h4 { font-size: var(--fs-body); }
+
+p { line-height: var(--lh-relaxed); }
+
+/* Angka pakai Space Grotesk + tabular figures.
+   Tanpa tabular-nums, angka di tabel bergoyang
+   saat nilainya berubah. */
+.num {
+  font-family: var(--font-display);
+  font-weight: var(--w-semibold);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+a {
+  color: var(--teal);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease);
+}
+
+a:hover { color: var(--petrol); }
+
+/* Fokus */
+/* Keyboard-only. Klik mouse tidak memunculkan ring. */
+
+:focus { outline: none; }
+
+:focus-visible {
+  outline: 2px solid var(--mint);
+  outline-offset: 2px;
+  border-radius: var(--r-sm);
+}
+
+/* Form */
+
+input,
+select,
+textarea,
+button {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+/* Tabel */
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+/* Utilitas */
+
+/* Untuk pembaca layar saja — terlihat oleh
+   screen reader, tidak oleh mata. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.hidden { display: none !important; }
+
+/* Halaman disembunyikan sampai guard.js selesai
+   verifikasi. Mencegah "flash" konten admin
+   sebelum redirect. */
+.guard-pending {
+  visibility: hidden;
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--slate-200);
+  border-radius: var(--r-full);
+  border: 2px solid var(--bg-page);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--border-strong); }
+
+/* Seleksi */
+
+::selection {
+  background: var(--mint-soft);
+  color: var(--petrol);
+}

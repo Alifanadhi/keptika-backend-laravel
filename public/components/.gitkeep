@@ -1,0 +1,6 @@
+Komponen HTML dirender oleh js/core/shell.js, bukan disimpan sebagai
+file HTML terpisah — supaya tidak ada duplikasi markup navigasi di
+13 halaman.
+
+Folder ini disediakan kalau nanti Anda ingin memecah komponen
+menjadi file terpisah.

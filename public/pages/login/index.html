@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Masuk · Keptika</title>
+
+  <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Space+Grotesk:wght@600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/tokens.css">
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <link rel="stylesheet" href="../../css/pages/login.css">
+</head>
+<body>
+
+<div class="login-page">
+
+  <!-- Sisi kiri: identitas sistem -->
+  <aside class="login-brand">
+    <div class="login-brand__mark">
+      <img class="login-brand__logo" src="../../assets/images/logo-dss.svg" alt="">
+      <span>Keptika</span>
+    </div>
+
+    <div>
+      <h1 class="login-brand__title">Keputusan yang berpijak pada data.</h1>
+      <p class="login-brand__lede">
+        Sistem membaca aktivitas praktik siswa dan mengusulkan langkah
+        berikutnya. Keputusan akhir tetap di tangan guru.
+      </p>
+    </div>
+
+    <p class="login-brand__foot">
+      Universitas Pendidikan Indonesia · Penelitian Hibah UPI 2026<br>
+      AI-Driven Decision Support System · Versi 1.0
+    </p>
+  </aside>
+
+  <!-- Sisi kanan: form -->
+  <main class="login-form-side">
+    <div class="login-form">
+
+      <header class="login-form__head">
+        <h2 class="login-form__title">Masuk ke sistem</h2>
+        <p class="login-form__sub">Gunakan akun yang diberikan admin sekolah.</p>
+      </header>
+
+      <!-- Wadah pesan. Diisi oleh JS, dibiarkan
+           kosong (bukan display:none) supaya pembaca
+           layar mengumumkan isinya saat muncul. -->
+      <div id="alert-slot" role="alert" aria-live="assertive"></div>
+
+      <!-- novalidate: kita ingin pesan error sendiri,
+           bukan tooltip bawaan browser yang tidak
+           bisa distel dan bahasanya ikut OS. -->
+      <form id="login-form" novalidate>
+
+        <div class="field">
+          <label class="field__label" for="username">Username</label>
+          <input
+            class="input"
+            type="text"
+            id="username"
+            name="username"
+            placeholder="guru.siti"
+            autocomplete="username"
+            autocapitalize="none"
+            spellcheck="false"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="password">Kata sandi</label>
+          <div class="input-group">
+            <input
+              class="input"
+              type="password"
+              id="password"
+              name="password"
+              placeholder="••••••••"
+              autocomplete="current-password"
+              required
+            >
+            <button
+              type="button"
+              class="input-group__action"
+              id="toggle-password"
+              aria-label="Tampilkan kata sandi"
+            >
+              <svg id="eye-open" width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1.7 10S4.7 4.6 10 4.6 18.3 10 18.3 10 15.3 15.4 10 15.4 1.7 10 1.7 10Z"/>
+                <circle cx="10" cy="10" r="2.4"/>
+              </svg>
+              <svg id="eye-off" class="hidden" width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7.9 4.9A7.6 7.6 0 0 1 10 4.6c5.3 0 8.3 5.4 8.3 5.4a14 14 0 0 1-2 2.8M5.1 6A14 14 0 0 0 1.7 10s3 5.4 8.3 5.4a7.6 7.6 0 0 0 2.9-.6"/>
+                <path d="m2.5 2.5 15 15"/>
+                <path d="M8.4 8.5a2.4 2.4 0 0 0 3.3 3.3"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="btn btn--primary btn--block login-form__submit"
+          id="submit-btn"
+        >
+          <span id="submit-label">Masuk</span>
+        </button>
+
+      </form>
+
+      <p class="login-form__note">
+        Lupa kata sandi? Hubungi admin sekolah untuk mengatur ulang.
+      </p>
+
+      <!-- Kredensial demo — hapus sebelum deploy -->
+      
+      <!-- /demo -->
+
+    </div>
+  </main>
+
+</div>
+
+<script type="module" src="../../js/pages/login.js"></script>
+</body>
+</html>

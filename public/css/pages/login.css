@@ -1,0 +1,144 @@
+/* Halaman login. */
+
+.login-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 480px;
+}
+
+/* Sisi kiri: identitas */
+/* Ini satu-satunya tempat sistem "berbicara".
+   Setelah login, layar milik data. */
+
+.login-brand {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--sp-12);
+  background: var(--petrol);
+  color: var(--text-on-dark);
+  overflow: hidden;
+}
+
+/* Grid halus di latar — meminjam bahasa visual
+   dari lembar kerja teknik (job-sheet), bukan
+   dekorasi kosong. */
+.login-brand::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(circle at 30% 40%, #000 0%, transparent 78%);
+}
+
+.login-brand > * { position: relative; }
+
+.login-brand__mark {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  font-family: var(--font-display);
+  font-weight: var(--w-semibold);
+  font-size: var(--fs-lead);
+  letter-spacing: -0.01em;
+}
+
+.login-brand__logo {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--r-md);
+  flex-shrink: 0;
+}
+
+.login-brand__title {
+  font-family: var(--font-display);
+  font-weight: var(--w-semibold);
+  font-size: 38px;
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+  color: var(--text-on-dark);
+  max-width: 13ch;
+}
+
+.login-brand__lede {
+  margin-top: var(--sp-4);
+  max-width: 42ch;
+  font-size: var(--fs-lead);
+  line-height: var(--lh-relaxed);
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.login-brand__foot {
+  font-size: var(--fs-caption);
+  color: rgba(255, 255, 255, 0.42);
+  line-height: var(--lh-relaxed);
+}
+
+/* Sisi kanan: form */
+
+.login-form-side {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-8);
+  background: var(--bg-panel);
+}
+
+.login-form {
+  width: 100%;
+  max-width: 340px;
+}
+
+.login-form__head { margin-bottom: var(--sp-8); }
+
+.login-form__title {
+  font-size: var(--fs-h2);
+  margin-bottom: var(--sp-2);
+}
+
+.login-form__sub {
+  font-size: var(--fs-body);
+  color: var(--text-muted);
+}
+
+.login-form .alert { margin-bottom: var(--sp-4); }
+
+.login-form__submit { margin-top: var(--sp-6); }
+
+.login-form__note {
+  margin-top: var(--sp-5);
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--slate-100);
+  font-size: var(--fs-caption);
+  color: var(--text-hint);
+  line-height: var(--lh-relaxed);
+  text-align: center;
+}
+
+/* Panel kredensial demo — hapus sebelum deploy */
+
+/* Responsif */
+
+@media (max-width: 900px) {
+  .login-page { grid-template-columns: 1fr; }
+
+  /* Panel merek diringkas jadi header. Judul besar
+     dan grid dibuang — di layar kecil, ruang milik form. */
+  .login-brand {
+    padding: var(--sp-6);
+    min-height: auto;
+  }
+  .login-brand::before { display: none; }
+  .login-brand__title,
+  .login-brand__lede,
+  .login-brand__foot { display: none; }
+
+  .login-form-side {
+    align-items: flex-start;
+    padding: var(--sp-8) var(--sp-5) var(--sp-12);
+  }
+}

@@ -1,0 +1,752 @@
+/* Komponen data: indikator, tabel, rekomendasi, modal. */
+
+/* Grid */
+
+.grid       { display: grid; gap: var(--sp-4); }
+.grid--2    { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid--3    { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid--4    { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.grid--main { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); align-items: start; }
+
+.stack      { display: flex; flex-direction: column; gap: var(--sp-4); }
+.row        { display: flex; align-items: center; gap: var(--sp-3); }
+.row--wrap  { flex-wrap: wrap; }
+.row--end   { justify-content: flex-end; }
+.spacer     { flex: 1; }
+
+/* Metrik */
+/* Angka besar. Space Grotesk + tabular-nums,
+   supaya kolom angka tidak bergoyang. */
+
+.metric {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: var(--sp-4) var(--sp-5);
+}
+
+.metric__label {
+  font-size: var(--fs-caption);
+  color: var(--text-muted);
+  margin-bottom: var(--sp-2);
+}
+
+.metric__value {
+  font-family: var(--font-display);
+  font-weight: var(--w-semibold);
+  font-size: 26px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  color: var(--text-title);
+  line-height: 1.1;
+}
+
+.metric__foot {
+  font-size: var(--fs-caption);
+  color: var(--text-hint);
+  margin-top: var(--sp-2);
+}
+
+/* Indikator p/e/k/g */
+/* Empat variabel learning analytics dari proposal.
+   Warna SELALU mengkodekan level, tidak pernah
+   sekadar membedakan kolom. */
+
+.indikator {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  padding: var(--sp-3);
+  border-radius: var(--r-md);
+  background: var(--bg-subtle);
+  border: 1px solid var(--slate-100);
+}
+
+.indikator__key {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-caption);
+  color: var(--text-muted);
+}
+
+.indikator__sym {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--r-sm);
+  font-family: var(--font-display);
+  font-weight: var(--w-semibold);
+  font-size: 11px;
+  background: var(--slate-100);
+  color: var(--slate-700);
+}
+
+.indikator__val {
+  font-family: var(--font-display);
+  font-weight: var(--w-semibold);
+  font-size: var(--fs-h2);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.indikator__level {
+  font-size: 11px;
+  font-weight: var(--w-medium);
+}
+
+/* Level — bukan dekorasi. Merah = butuh tindakan. */
+/* Warna = tone dari rules.tone(), bukan level langsung —
+   arah E berlawanan (kesalahan rendah = bagus). */
+.indikator--danger  { background: var(--danger-soft);  border-color: transparent; }
+.indikator--danger  .indikator__val,
+.indikator--danger  .indikator__level,
+.indikator--danger  .indikator__sym { color: var(--danger); }
+.indikator--danger  .indikator__sym { background: rgba(180, 52, 44, 0.12); }
+
+.indikator--warning { background: var(--warning-soft); border-color: transparent; }
+.indikator--warning .indikator__val,
+.indikator--warning .indikator__level,
+.indikator--warning .indikator__sym { color: var(--warning); }
+.indikator--warning .indikator__sym { background: rgba(199, 122, 34, 0.12); }
+
+.indikator--success { background: var(--success-soft); border-color: transparent; }
+.indikator--success .indikator__val,
+.indikator--success .indikator__level,
+.indikator--success .indikator__sym { color: var(--success); }
+.indikator--success .indikator__sym { background: rgba(15, 118, 110, 0.12); }
+
+/* Rekomendasi */
+/* Ini inti sistem. Diberi ruang paling besar
+   di layar, karena inilah yang guru cari. */
+
+.rekom {
+  border-radius: var(--r-lg);
+  padding: var(--sp-5);
+  border: 1px solid transparent;
+}
+
+.rekom--danger  { background: var(--danger-soft);  border-color: rgba(180, 52, 44, 0.18); }
+.rekom--warning { background: var(--warning-soft); border-color: rgba(199, 122, 34, 0.18); }
+.rekom--success { background: var(--success-soft); border-color: rgba(15, 118, 110, 0.18); }
+.rekom--neutral { background: var(--bg-subtle);    border-color: var(--border); }
+.rekom--info    { background: var(--info-soft);    border-color: rgba(14, 76, 90, 0.18); }
+
+.rekom__head {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-2);
+}
+
+.rekom__code {
+  font-family: var(--font-display);
+  font-weight: var(--w-semibold);
+  font-size: var(--fs-caption);
+  letter-spacing: 0.02em;
+  padding: 3px var(--sp-2);
+  border-radius: var(--r-full);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.rekom__label {
+  font-size: var(--fs-h3);
+  font-weight: var(--w-medium);
+}
+
+.rekom__why {
+  font-size: var(--fs-small);
+  line-height: var(--lh-relaxed);
+  opacity: 0.86;
+}
+
+.rekom--danger  .rekom__code,
+.rekom--danger  .rekom__label,
+.rekom--danger  .rekom__why  { color: var(--danger); }
+.rekom--warning .rekom__code,
+.rekom--warning .rekom__label,
+.rekom--warning .rekom__why  { color: var(--warning); }
+.rekom--success .rekom__code,
+.rekom--success .rekom__label,
+.rekom--success .rekom__why  { color: var(--success); }
+.rekom--info    .rekom__code,
+.rekom--info    .rekom__label,
+.rekom--info    .rekom__why  { color: var(--info); }
+.rekom--neutral .rekom__code,
+.rekom--neutral .rekom__label { color: var(--text-title); }
+.rekom--neutral .rekom__why   { color: var(--text-muted); }
+
+/* Tombol Terima / Ubah / Tolak.
+   Guru adalah pengambil keputusan — sistem hanya
+   mengusulkan. Ketiga tombol punya bobot visual
+   SAMA, supaya tidak ada yang terdorong. */
+.rekom__act {
+  display: flex;
+  gap: var(--sp-2);
+  margin-top: var(--sp-4);
+  padding-top: var(--sp-4);
+  border-top: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+/* Tabel */
+
+.table-wrap {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+
+.table-scroll { overflow-x: auto; }
+
+.table { min-width: 720px; }
+
+.table th {
+  padding: var(--sp-3) var(--sp-4);
+  text-align: left;
+  font-size: var(--fs-caption);
+  font-weight: var(--w-medium);
+  color: var(--text-muted);
+  background: var(--bg-subtle);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+}
+
+.table td {
+  padding: var(--sp-3) var(--sp-4);
+  border-bottom: 1px solid var(--slate-100);
+  font-size: var(--fs-small);
+  vertical-align: middle;
+}
+
+.table tbody tr:last-child td { border-bottom: none; }
+
+.table tbody tr {
+  transition: background var(--dur-fast) var(--ease);
+}
+.table tbody tr:hover { background: var(--bg-subtle); }
+
+/* Baris yang bisa diklik harus TERLIHAT bisa diklik. */
+.table tbody tr.is-clickable { cursor: pointer; }
+
+.table__name {
+  font-weight: var(--w-medium);
+  color: var(--text-title);
+}
+
+.table__sub {
+  font-size: var(--fs-caption);
+  color: var(--text-hint);
+  margin-top: 1px;
+}
+
+/* Nilai P/E/K/G dalam sel tabel — kompak. */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  height: 24px;
+  padding: 0 var(--sp-2);
+  border-radius: var(--r-sm);
+  font-family: var(--font-display);
+  font-weight: var(--w-semibold);
+  font-size: var(--fs-caption);
+  font-variant-numeric: tabular-nums;
+}
+
+.pill--danger  { background: var(--danger-soft);  color: var(--danger); }
+.pill--warning { background: var(--warning-soft); color: var(--warning); }
+.pill--success { background: var(--success-soft); color: var(--success); }
+.pill--kosong { background: var(--slate-100);    color: var(--text-hint); }
+
+/* Progress bar */
+
+.bar {
+  height: 6px;
+  border-radius: var(--r-full);
+  background: var(--slate-100);
+  overflow: hidden;
+}
+
+.bar__fill {
+  height: 100%;
+  border-radius: var(--r-full);
+  background: var(--teal);
+  transition: width var(--dur-slow) var(--ease-out);
+}
+
+.bar--sm { height: 4px; }
+
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.bar-row .bar { flex: 1; min-width: 60px; }
+
+.bar-row__num {
+  font-family: var(--font-display);
+  font-weight: var(--w-semibold);
+  font-size: var(--fs-caption);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+  min-width: 34px;
+  text-align: right;
+}
+
+/* Checklist tahapan */
+/* Dipakai siswa untuk melapor progres job-sheet. */
+
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  padding: var(--sp-3);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  margin-bottom: var(--sp-2);
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease),
+              background var(--dur-fast) var(--ease);
+}
+
+.step:hover { border-color: var(--border-strong); }
+
+.step--done {
+  background: var(--success-soft);
+  border-color: rgba(15, 118, 110, 0.22);
+}
+
+.step__box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--r-sm);
+  background: var(--bg-panel);
+  color: transparent;
+  transition: all var(--dur-fast) var(--ease);
+}
+
+.step--done .step__box {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: #fff;
+}
+
+.step__num {
+  font-family: var(--font-display);
+  font-weight: var(--w-semibold);
+  font-size: 11px;
+  color: var(--text-hint);
+  min-width: 14px;
+}
+
+.step--done .step__num { color: var(--success); }
+
+.step__text {
+  font-size: var(--fs-small);
+  color: var(--text-body);
+  line-height: var(--lh-normal);
+}
+
+.step--done .step__text { color: var(--success); }
+
+.step input { position: absolute; opacity: 0; pointer-events: none; }
+
+/* ============ RATING 1-5 ================== */
+
+.rating { display: flex; gap: var(--sp-2); }
+
+.rating__opt {
+  flex: 1;
+  height: 38px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--bg-panel);
+  font-family: var(--font-display);
+  font-weight: var(--w-semibold);
+  font-size: var(--fs-body);
+  color: var(--text-muted);
+  transition: all var(--dur-fast) var(--ease);
+}
+
+.rating__opt:hover { border-color: var(--border-strong); }
+
+.rating__opt--on {
+  background: var(--petrol);
+  border-color: var(--petrol);
+  color: var(--text-on-dark);
+}
+
+.rating input { position: absolute; opacity: 0; pointer-events: none; }
+
+/* Checkbox */
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  cursor: pointer;
+  font-size: var(--fs-small);
+  transition: border-color var(--dur-fast) var(--ease),
+              background var(--dur-fast) var(--ease);
+}
+
+.check:hover { border-color: var(--border-strong); }
+.check--on   { background: var(--mint-soft); border-color: var(--mint); }
+
+.check__box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--r-sm);
+  color: transparent;
+  transition: all var(--dur-fast) var(--ease);
+}
+
+.check--on .check__box {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: #fff;
+}
+
+.check input { position: absolute; opacity: 0; pointer-events: none; }
+
+/* Empty state */
+
+.empty {
+  padding: var(--sp-12) var(--sp-5);
+  text-align: center;
+}
+
+.empty__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: 0 auto var(--sp-4);
+  border-radius: var(--r-lg);
+  background: var(--slate-100);
+  color: var(--text-hint);
+}
+
+.empty__title {
+  font-size: var(--fs-lead);
+  font-weight: var(--w-medium);
+  color: var(--text-title);
+  margin-bottom: var(--sp-2);
+}
+
+.empty__desc {
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+  max-width: 40ch;
+  margin: 0 auto var(--sp-5);
+  line-height: var(--lh-relaxed);
+}
+
+/* Chip ringkasan */
+
+.chips { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  height: 30px;
+  padding: 0 var(--sp-3);
+  border-radius: var(--r-full);
+  font-size: var(--fs-caption);
+  font-weight: var(--w-medium);
+}
+
+.chip__n {
+  font-family: var(--font-display);
+  font-weight: var(--w-semibold);
+  font-variant-numeric: tabular-nums;
+}
+
+.chip--danger  { background: var(--danger-soft);  color: var(--danger); }
+.chip--warning { background: var(--warning-soft); color: var(--warning); }
+.chip--success { background: var(--success-soft); color: var(--success); }
+.chip--neutral { background: var(--slate-100);    color: var(--slate-700); }
+
+/* Modal */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-5);
+  background: rgba(28, 42, 49, 0.42);
+  backdrop-filter: blur(2px);
+  animation: fadeIn var(--dur-fast) var(--ease);
+}
+
+.overlay--out { animation: fadeOut 160ms var(--ease) forwards; }
+.overlay--out .modal { animation: modalOut 160ms var(--ease) forwards; }
+
+@keyframes fadeOut { to { opacity: 0; } }
+@keyframes modalOut {
+  to { opacity: 0; transform: translateY(6px) scale(0.98); }
+}
+
+/* Konfirmasi */
+
+.konfirm {
+  padding: var(--sp-6) var(--sp-6) var(--sp-5);
+  text-align: center;
+}
+
+.konfirm__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: 0 auto var(--sp-4);
+  border-radius: var(--r-full);
+}
+
+.konfirm__icon--danger  { background: var(--danger-soft);  color: var(--danger); }
+.konfirm__icon--warning { background: var(--warning-soft); color: var(--warning); }
+.konfirm__icon--info    { background: var(--info-soft);    color: var(--info); }
+
+.konfirm__title {
+  font-size: var(--fs-h3);
+  margin-bottom: var(--sp-2);
+}
+
+.konfirm__msg {
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+  line-height: var(--lh-relaxed);
+  max-width: 32ch;
+  margin: 0 auto;
+}
+
+.konfirm + .modal__foot { justify-content: stretch; }
+.konfirm + .modal__foot .btn { flex: 1; }
+
+.modal {
+  width: 100%;
+  max-width: 440px;
+  max-height: 88vh;
+  overflow-y: auto;
+  background: var(--bg-panel);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-lg);
+  animation: modalIn var(--dur-base) var(--ease-out);
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(10px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding: var(--sp-5);
+  border-bottom: 1px solid var(--slate-100);
+}
+
+.modal__title { font-size: var(--fs-h3); }
+
+.modal__sub {
+  font-size: var(--fs-caption);
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.modal__x {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: var(--r-sm);
+  color: var(--text-hint);
+}
+.modal__x:hover { background: var(--slate-100); color: var(--text-body); }
+
+.modal__body { padding: var(--sp-5); }
+
+.modal__foot {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--sp-2);
+  padding: var(--sp-4) var(--sp-5);
+  border-top: 1px solid var(--slate-100);
+  background: var(--bg-subtle);
+}
+
+/* Seksi */
+
+.section__title {
+  font-size: var(--fs-caption);
+  font-weight: var(--w-medium);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-hint);
+  margin-bottom: var(--sp-3);
+}
+
+.divider {
+  height: 1px;
+  background: var(--slate-100);
+  margin: var(--sp-5) 0;
+}
+
+.note {
+  padding: var(--sp-3);
+  border-left: 3px solid var(--mint);
+  background: var(--bg-subtle);
+  border-radius: 0;
+  font-size: var(--fs-small);
+  line-height: var(--lh-relaxed);
+  color: var(--text-body);
+}
+
+.note__from {
+  font-size: var(--fs-caption);
+  color: var(--text-hint);
+  margin-bottom: var(--sp-1);
+}
+
+/* Responsif */
+
+@media (max-width: 1100px) {
+  .grid--main { grid-template-columns: 1fr; }
+  .grid--4    { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 720px) {
+  .grid--2, .grid--3, .grid--4 { grid-template-columns: 1fr; }
+  .rekom__act { flex-direction: column; }
+  .rekom__act .btn { width: 100%; }
+}
+
+/* Editor tahapan job-sheet */
+
+.tahap {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-2);
+}
+
+.tahap__num {
+  width: 22px;
+  flex-shrink: 0;
+  font-size: var(--fs-caption);
+  color: var(--text-hint);
+  text-align: right;
+}
+
+.tahap__input { flex: 1; min-width: 0; }
+
+.tahap__aksi {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.tahap__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--r-sm);
+  color: var(--text-hint);
+  transition: background var(--dur-fast) var(--ease),
+              color var(--dur-fast) var(--ease);
+}
+
+.tahap__btn:hover:not(:disabled) {
+  background: var(--slate-100);
+  color: var(--text-body);
+}
+
+.tahap__btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.tahap__btn--x:hover:not(:disabled) {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+/* Roster siswa dalam kelas */
+
+.roster {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3);
+  border-bottom: 1px solid var(--slate-100);
+}
+
+.roster:last-child { border-bottom: none; }
+
+.roster__avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: var(--r-full);
+  background: var(--petrol-soft);
+  color: var(--petrol);
+  font-size: var(--fs-caption);
+  font-weight: var(--w-medium);
+}
+
+.roster__meta { flex: 1; min-width: 0; }
+
+.roster__nama {
+  font-size: var(--fs-small);
+  font-weight: var(--w-medium);
+  color: var(--text-title);
+}
+
+.roster__sub {
+  font-size: var(--fs-caption);
+  color: var(--text-hint);
+}
+
+@media (max-width: 720px) {
+  .tahap { flex-wrap: wrap; }
+  .tahap__input { min-width: 100%; order: 1; }
+  .tahap__num { order: 0; }
+  .tahap__aksi { order: 2; margin-left: auto; }
+}

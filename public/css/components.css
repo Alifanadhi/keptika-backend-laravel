@@ -1,0 +1,322 @@
+/* Komponen: button, field, card, badge, alert, toast, skeleton. */
+
+/* Button */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  height: var(--h-button);
+  padding: 0 var(--sp-5);
+  border-radius: var(--r-md);
+  font-size: var(--fs-body);
+  font-weight: var(--w-medium);
+  white-space: nowrap;
+  transition:
+    background var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease);
+}
+
+.btn:active:not(:disabled) { transform: scale(0.98); }
+
+.btn--primary {
+  background: var(--petrol);
+  color: var(--text-on-dark);
+}
+.btn--primary:hover:not(:disabled) {
+  background: var(--petrol-hover);
+  box-shadow: var(--shadow-md);
+}
+
+.btn--secondary {
+  background: var(--bg-panel);
+  color: var(--text-body);
+  border: 1px solid var(--border);
+}
+.btn--secondary:hover:not(:disabled) {
+  border-color: var(--border-strong);
+  background: var(--bg-subtle);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--text-muted);
+}
+.btn--ghost:hover:not(:disabled) {
+  background: var(--slate-100);
+  color: var(--text-body);
+}
+
+.btn--danger {
+  background: var(--danger);
+  color: var(--text-on-dark);
+}
+.btn--danger:hover:not(:disabled) { filter: brightness(0.92); }
+
+.btn--block { width: 100%; }
+.btn--sm    { height: var(--h-button-sm); padding: 0 var(--sp-3); font-size: var(--fs-small); }
+
+/* Spinner di dalam tombol saat loading.
+   Label diganti, lebar tombol dipertahankan. */
+.btn__spinner {
+  width: 15px;
+  height: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 600ms linear infinite;
+}
+.btn--secondary .btn__spinner,
+.btn--ghost .btn__spinner {
+  border-color: var(--slate-200);
+  border-top-color: var(--petrol);
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Field */
+
+.field { margin-bottom: var(--sp-4); }
+
+.field__label {
+  display: block;
+  margin-bottom: var(--sp-2);
+  font-size: var(--fs-small);
+  font-weight: var(--w-medium);
+  color: var(--text-muted);
+}
+
+.field__hint {
+  margin-top: var(--sp-2);
+  font-size: var(--fs-caption);
+  color: var(--text-hint);
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  height: var(--h-input);
+  padding: 0 var(--sp-3);
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  color: var(--text-title);
+  transition:
+    border-color var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease);
+}
+
+.textarea {
+  height: auto;
+  min-height: 88px;
+  padding: var(--sp-3);
+  resize: vertical;
+  line-height: var(--lh-normal);
+}
+
+.input::placeholder,
+.textarea::placeholder { color: var(--text-hint); }
+
+.input:hover,
+.select:hover,
+.textarea:hover { border-color: var(--border-strong); }
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--mint);
+  box-shadow: var(--shadow-focus);
+}
+
+/* State error. Ditambah lewat JS, bukan :invalid —
+   :invalid menyala sebelum user selesai mengetik. */
+.input--error,
+.input--error:hover {
+  border-color: var(--danger);
+}
+.input--error:focus {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 3px rgba(180, 52, 44, 0.16);
+}
+
+/* Input dengan ikon di kanan (mis. toggle sandi) */
+.input-group { position: relative; }
+.input-group .input { padding-right: 42px; }
+
+.input-group__action {
+  position: absolute;
+  right: var(--sp-2);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--r-sm);
+  color: var(--text-hint);
+  transition: color var(--dur-fast) var(--ease),
+              background var(--dur-fast) var(--ease);
+}
+.input-group__action:hover {
+  color: var(--text-body);
+  background: var(--slate-100);
+}
+
+/* Card */
+
+.card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: var(--sp-5);
+}
+
+.card--flat  { border: none; box-shadow: var(--shadow-sm); }
+.card--pad-lg { padding: var(--sp-8); }
+
+.card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-5);
+}
+
+.card__title    { font-size: var(--fs-h3); }
+.card__subtitle { font-size: var(--fs-small); color: var(--text-muted); }
+
+/* Badge */
+/* Warna di badge SELALU mengkodekan makna,
+   tidak pernah sekadar dekorasi. */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  height: 22px;
+  padding: 0 var(--sp-2);
+  border-radius: var(--r-full);
+  font-size: var(--fs-caption);
+  font-weight: var(--w-medium);
+  white-space: nowrap;
+}
+
+.badge--neutral { background: var(--slate-100);    color: var(--slate-700); }
+.badge--success { background: var(--success-soft); color: var(--success); }
+.badge--warning { background: var(--warning-soft); color: var(--warning); }
+.badge--danger  { background: var(--danger-soft);  color: var(--danger); }
+.badge--info    { background: var(--info-soft);    color: var(--info); }
+.badge--accent  { background: var(--mint-soft);    color: var(--teal); }
+
+/* Alert */
+
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-2);
+  padding: var(--sp-3);
+  border-radius: var(--r-md);
+  font-size: var(--fs-small);
+  line-height: var(--lh-normal);
+}
+
+.alert__icon { flex-shrink: 0; margin-top: 1px; }
+
+.alert--danger  { background: var(--danger-soft);  color: var(--danger); }
+.alert--warning { background: var(--warning-soft); color: var(--warning); }
+.alert--success { background: var(--success-soft); color: var(--success); }
+.alert--info    { background: var(--info-soft);    color: var(--info); }
+
+/* Muncul dengan geser halus, bukan pop mendadak. */
+.alert--enter {
+  animation: alertIn var(--dur-base) var(--ease-out);
+}
+
+@keyframes alertIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Toast */
+
+.toast-stack {
+  position: fixed;
+  bottom: var(--sp-6);
+  right: var(--sp-6);
+  z-index: var(--z-toast);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  pointer-events: none;
+}
+
+.toast {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  min-width: 280px;
+  max-width: 380px;
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--slate-900);
+  color: var(--text-on-dark);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-lg);
+  font-size: var(--fs-small);
+  line-height: var(--lh-normal);
+  pointer-events: auto;
+  animation: toastIn var(--dur-base) var(--ease-out);
+}
+
+.toast--out { animation: toastOut var(--dur-base) var(--ease) forwards; }
+
+.toast__icon  { flex-shrink: 0; margin-top: 1px; }
+.toast__body  { flex: 1; }
+.toast__title { font-weight: var(--w-medium); }
+.toast__desc  { color: rgba(255, 255, 255, 0.72); margin-top: 2px; }
+
+.toast--success .toast__icon { color: var(--success-on-dark); }
+.toast--danger  .toast__icon { color: var(--danger-on-dark); }
+.toast--info    .toast__icon { color: var(--info-on-dark); }
+.toast--warning .toast__icon { color: var(--warning-soft); }
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes toastOut {
+  to { opacity: 0; transform: translateY(6px) scale(0.98); }
+}
+
+/* Skeleton */
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--slate-100) 25%,
+    var(--bg-subtle) 50%,
+    var(--slate-100) 75%
+  );
+  background-size: 200% 100%;
+  border-radius: var(--r-sm);
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+@media (max-width: 640px) {
+  .toast-stack {
+    left: var(--sp-4);
+    right: var(--sp-4);
+    bottom: var(--sp-4);
+  }
+  .toast { min-width: 0; max-width: none; }
+}
